@@ -31,7 +31,7 @@ export const AuthContextProvider = ({ children }) => {
 	};
 
 	async function updateRefreshtoken() {
-		const response = await axios.post(`${apiUrl}/users/refresh-token`, {
+		const response = await axios.post(`${apiUrl}/management/refresh-token`, {
 			refreshToken,
 		});
 		if (response.status === 200) {

@@ -130,7 +130,7 @@ const SiteSetting = () => {
 				postalCode,
 			};
 			axios
-				.post(`${apiUrl}/management/site`, data, config)
+				.patch(`${apiUrl}/management/site`, data, config)
 				.then((res) => {
 					// console.log(res);
 					setSite(res.data);

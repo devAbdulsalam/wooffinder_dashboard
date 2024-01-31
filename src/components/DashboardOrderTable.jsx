@@ -34,14 +34,14 @@ const DashboardOrderTable = ({ data, isLoading }) => {
 		},
 		{
 			Header: 'Price',
-			accessor: 'totalPrice',
+			accessor: 'total',
 			Cell: ({ value }) => (
 				<span className="px-3 py-3 font-normal text-slate-600">${value}</span>
 			),
 		},
 		{
 			Header: 'Status',
-			accessor: 'isDelivered',
+			accessor: 'status',
 			Cell: ({ value }) => getOrderStatus(value),
 		},
 		{
@@ -60,7 +60,7 @@ const DashboardOrderTable = ({ data, isLoading }) => {
 			},
 		},
 	];
-	
+
 	return (
 		<div className="overflow-scroll 2xl:overflow-visible">
 			<div className="w-[700px] 2xl:w-full">

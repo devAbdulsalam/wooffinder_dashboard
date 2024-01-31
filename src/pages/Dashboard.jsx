@@ -10,6 +10,7 @@ import DashboardOrderTable from '../components/DashboardOrderTable';
 import DashboardProductTable from '../components/DashboardProductTable';
 import SalesStat from '../components/SalesStat';
 import SellingCategory from '../components/SellingCategory';
+import moment from 'moment';
 
 // totalProducts,
 // 			totalTransactions,
@@ -46,6 +47,9 @@ const Dashboard = () => {
 	const handleEdit = (product) => {
 		setSelectedProduct(product);
 		navigate(`/products/${product._id}/edit`);
+	};
+	const handleDateAndTime = (date) => {
+		return moment(date).format('MMM DD, YYYY hh:mm A');
 	};
 	return (
 		<>
@@ -562,16 +566,19 @@ const Dashboard = () => {
 										<div className="avatar">
 											<img
 												className="rounded-full w-10 h-10"
-												src={trc.userId.image.url}
-												alt={trc.userId.name}
+												src={
+													trc.userId?.image?.url ||
+													'assets/img/users/user-10.jpg'
+												}
+												alt={trc.userId?.name}
 											/>
 										</div>
 										<div>
 											<h4 className="text-base text-slate-700 mb-[6px] leading-none">
-												{trc.userId.name}
+												{trc.userId?.name}
 											</h4>
 											<p className="text-sm text-slate-400 line-clamp-1 m-0 leading-none">
-												{trc.createdAt}
+												{handleDateAndTime(trc.createdAt)}
 											</p>
 										</div>
 									</div>

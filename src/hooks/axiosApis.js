@@ -18,7 +18,7 @@ const fetchDashboard = async (user) => {
 				Authorization: `Bearer ${user?.token}`,
 			},
 		};
-		const { data } = await axios.get(`${apiUrl}/general/dashboard`, config);
+		const { data } = await axios.get(`${apiUrl}/management/dashboard`, config);
 		return data;
 	} catch (error) {
 		console.log(error.message);
@@ -122,7 +122,7 @@ const fetchCustomers = async (user) => {
 				Authorization: `Bearer ${user?.token}`,
 			},
 		};
-		const { data } = await axios.get(`${apiUrl}/users`, config);
+		const { data } = await axios.get(`${apiUrl}/customers`, config);
 		return data;
 	} catch (error) {
 		console.log(error.message);
@@ -137,7 +137,7 @@ const fetchCustomer = async (prop) => {
 				Authorization: `Bearer ${user?.token}`,
 			},
 		};
-		const { data } = await axios.get(`${apiUrl}/users/${prop.id}`, config);
+		const { data } = await axios.get(`${apiUrl}/customers/${prop.id}`, config);
 		return data;
 	} catch (error) {
 		console.log(error.message);

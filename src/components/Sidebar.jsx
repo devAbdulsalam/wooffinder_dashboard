@@ -251,15 +251,11 @@ const Sidebar = ({ sideMenu, setSideMenu }) => {
 									Categories
 								</NavLink>
 							</li>
-							<li className="">
-								<a
-									onClick={() => handleNav(3)}
-									className={`${
-										nav == 0
-											? 'bg-themeLight hover:bg-themeLight text-theme'
-											: ''
-									}
-									 group rounded-md relative text-black text-lg font-medium inline-flex items-center w-full transition-colors ease-in-out duration-300 px-5 py-[9px] mb-3 hover:bg-gray sidebar-NavLink-active`}
+							<li>
+								<NavLink
+									to={'category'}
+									onClick={handleSideBar}
+									className="group rounded-md relative text-black text-lg font-medium inline-flex items-center w-full transition-colors ease-in-out duration-300 px-5 py-[9px] mb-3 hover:bg-gray sidebar-NavLink-active"
 								>
 									<span className="inline-block translate-y-[1px] mr-[10px] text-xl">
 										<svg
@@ -276,59 +272,13 @@ const Sidebar = ({ sideMenu, setSideMenu }) => {
 										</svg>
 									</span>
 									Customers
-									<span
-										className={`absolute right-4 top-[52%] transition-transform duration-300 origin-center w-4 h-4  ${
-											nav == 3
-												? 'translate-y-[-10px] rotate-90'
-												: 'translate-y-[-10px]'
-										}`}
-									>
-										<svg
-											className="-translate-y-[5px]"
-											xmlns="http://www.w3.org/2000/svg"
-											viewBox="0 0 24 24"
-											width="16"
-											height="16"
-										>
-											<path
-												fill="currentColor"
-												d="M15.4,9.88,10.81,5.29a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42L14,11.29a1,1,0,0,1,0,1.42L9.4,17.29a1,1,0,0,0,1.41,1.42l4.59-4.59A3,3,0,0,0,15.4,9.88Z"
-											/>
-										</svg>
-									</span>
-								</a>
-								{nav === 3 && (
-									<ul className="pl-[42px] pr-[20px] pb-3">
-										<li>
-											<NavLink
-												to={'/customers'}
-												onClick={handleSideBar}
-												className="block font-normal w-full text-[#6D6F71] hover:text-theme nav-dot"
-											>
-												Customers List
-											</NavLink>
-										</li>
-										<li>
-											<NavLink
-												to={''}
-												onClick={handleSideBar}
-												className="block font-normal w-full text-[#6D6F71] hover:text-theme nav-dot"
-											>
-												Customer Details
-											</NavLink>
-										</li>
-									</ul>
-								)}
+								</NavLink>
 							</li>
 							<li>
-								<a
-									onClick={() => handleNav(4)}
-									className={`
-										${
-											nav == 4
-												? 'bg-themeLight hover:bg-themeLight text-theme'
-												: ''
-										} group rounded-md relative text-black text-lg font-medium inline-flex items-center w-full transition-colors ease-in-out duration-300 px-5 py-[9px] mb-3 hover:bg-gray sidebar-NavLink-active`}
+								<NavLink
+									to={'orders'}
+									onClick={handleSideBar}
+									className="group rounded-md relative text-black text-lg font-medium inline-flex items-center w-full transition-colors ease-in-out duration-300 px-5 py-[9px] mb-3 hover:bg-gray sidebar-NavLink-active"
 								>
 									<span className="inline-block translate-y-[1px] mr-[10px] text-xl">
 										<svg
@@ -345,15 +295,17 @@ const Sidebar = ({ sideMenu, setSideMenu }) => {
 										</svg>
 									</span>
 									Orders
-									<span
-										className={`absolute right-4 top-[52%] transition-transform duration-300 origin-center w-4 h-4" ${
-											nav == 4
-												? 'translate-y-[-10px] rotate-90'
-												: 'translate-y-[-10px]'
-										}`}
-									>
+								</NavLink>
+							</li>
+							<li>
+								<NavLink
+									to={'transactions'}
+									onClick={handleSideBar}
+									className="group rounded-md relative text-black text-lg font-medium inline-flex items-center w-full transition-colors ease-in-out duration-300 px-5 py-[9px] mb-3 hover:bg-gray sidebar-NavLink-active"
+								>
+									<span className="inline-block translate-y-[1px] mr-[10px] text-xl">
 										<svg
-											className="-translate-y-[5px]"
+											className="-translate-y-[4px]"
 											xmlns="http://www.w3.org/2000/svg"
 											viewBox="0 0 24 24"
 											width="16"
@@ -361,34 +313,12 @@ const Sidebar = ({ sideMenu, setSideMenu }) => {
 										>
 											<path
 												fill="currentColor"
-												d="M15.4,9.88,10.81,5.29a1,1,0,0,0-1.41,0,1,1,0,0,0,0,1.42L14,11.29a1,1,0,0,1,0,1.42L9.4,17.29a1,1,0,0,0,1.41,1.42l4.59-4.59A3,3,0,0,0,15.4,9.88Z"
+												d="m11.349,24H0V3C0,1.346,1.346,0,3,0h12c1.654,0,3,1.346,3,3v5.059c-.329-.036-.662-.059-1-.059s-.671.022-1,.059V3c0-.552-.448-1-1-1H3c-.552,0-1,.448-1,1v19h7.518c.506.756,1.125,1.429,1.831,2Zm0-14h-7.349v2h5.518c.506-.756,1.125-1.429,1.831-2Zm-7.349,7h4c0-.688.084-1.356.231-2h-4.231v2Zm20,0c0,3.859-3.141,7-7,7s-7-3.141-7-7,3.141-7,7-7,7,3.141,7,7Zm-2,0c0-2.757-2.243-5-5-5s-5,2.243-5,5,2.243,5,5,5,5-2.243,5-5ZM14,5H4v2h10v-2Zm5.589,9.692l-3.228,3.175-1.63-1.58-1.393,1.436,1.845,1.788c.314.315.733.489,1.179.489s.865-.174,1.173-.482l3.456-3.399-1.402-1.426Z"
 											/>
 										</svg>
 									</span>
-								</a>
-								{nav === 4 && (
-									<ul className="pl-[42px] pr-[20px] pb-3">
-										<li>
-											<NavLink
-												to={'orders'}
-												onClick={handleSideBar}
-												className="block font-normal w-full text-[#6D6F71] hover:text-theme nav-dot"
-											>
-												Orders
-											</NavLink>
-										</li>
-
-										<li>
-											<NavLink
-												to={'transactions'}
-												onClick={handleSideBar}
-												className="block font-normal w-full text-[#6D6F71] hover:text-theme nav-dot"
-											>
-												Transactions
-											</NavLink>
-										</li>
-									</ul>
-								)}
+									Transactions
+								</NavLink>
 							</li>
 							<li>
 								<NavLink

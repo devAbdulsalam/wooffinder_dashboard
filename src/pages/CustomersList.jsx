@@ -95,7 +95,7 @@ const CustomersList = () => {
 						<h3 className="mb-0 text-[28px]">Customer</h3>
 						<ul className="text-tiny font-medium flex items-center space-x-3 text-text3">
 							<li className="breadcrumb-item text-muted">
-								<Link to={"/product-list"} className="text-hover-primary">
+								<Link to={'/product-list'} className="text-hover-primary">
 									{' '}
 									Home
 								</Link>
@@ -183,11 +183,6 @@ const CustomersList = () => {
 									Export
 								</a>
 							</div>
-							<div className="product-add-btn flex ">
-								<a href="#" className="tp-btn">
-									Add Customer
-								</a>
-							</div>
 						</div>
 					</div>
 					<div className="relative overflow-x-auto  mx-8">
@@ -263,7 +258,10 @@ const CustomersList = () => {
 													<div className="flex items-center space-x-5 text-heading">
 														<img
 															className="w-[40px] h-[40px] rounded-md"
-															src="assets/img/users/user-10.jpg"
+															src={
+																user?.image?.url ||
+																'assets/img/users/user-10.jpg'
+															}
 															alt=""
 														/>
 														<span className="font-medium ">{user.name}</span>

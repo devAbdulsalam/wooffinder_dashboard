@@ -257,17 +257,6 @@ const Order = () => {
 							<tbody>
 								{orders?.length > 0 &&
 									orders?.map((order) => {
-										const highestPriceItem = getHighestPriceItem(order.cart);
-										// 	.reduce(
-										// 	(maxItem, currentItem) => {
-										// 		return currentItem.price > maxItem.price
-										// 			? currentItem
-										// 			: maxItem;
-										// 	},
-										// 	order.cart[0]
-										// );
-
-										// console.log(highestPriceItem?.image?.url);
 										return (
 											<tr
 												key={order._id}
@@ -286,8 +275,8 @@ const Order = () => {
 													>
 														<img
 															className="w-[60px] h-[60px] rounded-md"
-															src={highestPriceItem?.image?.url}
-															alt={highestPriceItem?.name}
+															src={order.cart[0]?.productId.image?.url}
+															alt={order.cart[0]?.productId.name}
 														/>
 														<span className="font-medium text-heading text-hover-primary transition">
 															{order.name || order.firstName}
@@ -301,7 +290,7 @@ const Order = () => {
 													{order?.cart?.length}
 												</td>
 												<td className="px-3 py-3 font-normal text-[#55585B] text-end">
-													${order.totalPrice}
+													${order.total}
 												</td>
 												<td className="px-3 py-3 font-normal text-heading text-end">
 													<div className="flex justify-end items-center space-x-1 text-tiny">
@@ -328,7 +317,7 @@ const Order = () => {
 																	handleMouseEnterEdit(order._id)
 																}
 																onMouseLeave={handleMouseLeaveEdit}
-																onClick={() => handleEdit(order)}
+																onClick={handleEdit(order)}
 																aria-label="Edit"
 															>
 																<svg
@@ -364,7 +353,7 @@ const Order = () => {
 																	handleMouseEnterDelete(order._id)
 																}
 																onMouseLeave={handleMouseLeaveDelete}
-																onClick={() => handleDelete(order)}
+																onClick={handleDelete(order)}
 															>
 																<svg
 																	className="-translate-y-px"

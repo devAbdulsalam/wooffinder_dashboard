@@ -6,6 +6,12 @@ const getOrderStatus = (status) => {
 					{status}
 				</span>
 			);
+		case 'checkout':
+			return (
+				<span className="text-[11px]  text-warning px-3 py-1 rounded-md leading-none bg-warning/10 font-medium">
+					{status}
+				</span>
+			);
 		case 'shipped':
 			return (
 				<span className="text-[11px]  text-info px-3 py-1 rounded-md leading-none bg-info/10 font-medium">

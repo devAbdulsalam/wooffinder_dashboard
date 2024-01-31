@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import Loader from '../components/Loader';
 import { Link } from 'react-router-dom';
 import getError from '../hooks/getError';
+import moment from 'moment';
 const Transaction = () => {
 	const { user, setSelectedProduct } = useContext(AuthContext);
 	const { data, isLoading, error } = useQuery(['transactions'], async () =>
@@ -35,6 +36,11 @@ const Transaction = () => {
 	const handleClick = (category) => {
 		setSelectedProduct(category);
 	};
+
+	const handleDateAndTime = (date) => {
+		return moment(date).format('MMM DD, YYYY hh:mm A');
+	};
+
 	return (
 		<>
 			<div className="body-content px-8 py-8 bg-slate-100">
@@ -168,14 +174,14 @@ const Transaction = () => {
 												</div>
 											</td>
 											<td className="px-3 py-3 font-normal text-[#55585B] text-end">
-												${transaction.cost}
+												${transaction.amount}
 											</td>
 											<td className="px-3 py-3 font-normal text-[#55585B] text-end">
-												Jan 21, 2023 08:30 AM
+												{handleDateAndTime(transaction.createdAt)}
 											</td>
 											<td className="px-3 py-3 text-end">
 												<span className="text-[11px]  text-success px-3 py-1 rounded-md leading-none bg-success/10 font-medium text-end">
-													Paid
+													{transaction.status}
 												</span>
 											</td>
 											<td className="pl-9 py-3 text-end">

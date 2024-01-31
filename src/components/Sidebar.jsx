@@ -253,7 +253,7 @@ const Sidebar = ({ sideMenu, setSideMenu }) => {
 							</li>
 							<li>
 								<NavLink
-									to={'category'}
+									to={'customers'}
 									onClick={handleSideBar}
 									className="group rounded-md relative text-black text-lg font-medium inline-flex items-center w-full transition-colors ease-in-out duration-300 px-5 py-[9px] mb-3 hover:bg-gray sidebar-NavLink-active"
 								>

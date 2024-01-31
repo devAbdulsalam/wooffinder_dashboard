@@ -169,7 +169,7 @@ const ProductTable = ({ data, isLoading, handleDelete, handleEdit }) => {
 				data={data}
 				columns={columns}
 				globalFilter={globalFilter}
-				pageSize={2}
+				pageSize={5}
 				name={name}
 				isLoading={isLoading}
 			/>

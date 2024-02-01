@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Table from './Table';
 import getOrderStatus from '../hooks/getOrderStatus';
 const DashboardOrderTable = ({ data, isLoading }) => {
 	const navigate = useNavigate();
 	const columns = [
-				{
+		{
 			Header: 'Order Id',
 			accessor: '',
 			Cell: ({ row }) => {
@@ -17,7 +17,7 @@ const DashboardOrderTable = ({ data, isLoading }) => {
 				);
 			},
 		},
-		
+
 		{
 			Header: 'Price',
 			accessor: 'total',

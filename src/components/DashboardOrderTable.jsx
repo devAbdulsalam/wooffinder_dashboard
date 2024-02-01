@@ -5,22 +5,7 @@ import getOrderStatus from '../hooks/getOrderStatus';
 const DashboardOrderTable = ({ data, isLoading }) => {
 	const navigate = useNavigate();
 	const columns = [
-		{
-			Header: 'Name',
-			accessor: 'name',
-			Cell: ({ row }) => {
-				const order = row.original;
-				return (
-					<Link
-						to={order._id}
-						className="font-medium text-heading text-hover-primary"
-					>
-						{order.name || order.firstName}
-					</Link>
-				);
-			},
-		},
-		{
+				{
 			Header: 'Order Id',
 			accessor: '',
 			Cell: ({ row }) => {
@@ -32,6 +17,7 @@ const DashboardOrderTable = ({ data, isLoading }) => {
 				);
 			},
 		},
+		
 		{
 			Header: 'Price',
 			accessor: 'total',

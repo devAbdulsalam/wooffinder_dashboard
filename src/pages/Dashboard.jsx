@@ -568,7 +568,7 @@ const Dashboard = () => {
 												className="rounded-full w-10 h-10"
 												src={
 													trc.userId?.image?.url ||
-													'assets/img/users/user-10.jpg'
+													`https://ui-avatars.com/api/?name=${trc.amount}`
 												}
 												alt={trc.userId?.name}
 											/>

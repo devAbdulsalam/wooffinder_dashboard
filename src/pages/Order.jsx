@@ -275,8 +275,11 @@ const Order = () => {
 													>
 														<img
 															className="w-[60px] h-[60px] rounded-md"
-															src={order.cart[0]?.productId.image?.url}
-															alt={order.cart[0]?.productId.name}
+															src={
+																order.cart[0]?.productId?.image?.url ||
+																`https://ui-avatars.com/api/?name=${order.total}`
+															}
+															alt={order.cart[0]?.productId?.name}
 														/>
 														<span className="font-medium text-heading text-hover-primary transition">
 															{order.name || order.firstName}
@@ -305,7 +308,7 @@ const Order = () => {
 												</td>
 												<td className="px-3 py-3 text-end">
 													<span className="text-[11px]  text-success px-3 py-1 rounded-md leading-none bg-success/10 font-medium text-end">
-														{order.isDelivered}
+														{order.status}
 													</span>
 												</td>
 												<td className="px-9 py-3 text-end">
@@ -317,7 +320,7 @@ const Order = () => {
 																	handleMouseEnterEdit(order._id)
 																}
 																onMouseLeave={handleMouseLeaveEdit}
-																onClick={handleEdit(order)}
+																onClick={() => handleEdit(order)}
 																aria-label="Edit"
 															>
 																<svg
@@ -353,7 +356,7 @@ const Order = () => {
 																	handleMouseEnterDelete(order._id)
 																}
 																onMouseLeave={handleMouseLeaveDelete}
-																onClick={handleDelete(order)}
+																onClick={() => handleDelete(order)}
 															>
 																<svg
 																	className="-translate-y-px"

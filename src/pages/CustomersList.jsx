@@ -260,9 +260,9 @@ const CustomersList = () => {
 															className="w-[40px] h-[40px] rounded-md"
 															src={
 																user?.image?.url ||
-																'assets/img/users/user-10.jpg'
+																`https://ui-avatars.com/api/?name=${user.name}`
 															}
-															alt=""
+															alt={user.name}
 														/>
 														<span className="font-medium ">{user.name}</span>
 													</div>

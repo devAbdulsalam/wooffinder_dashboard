@@ -69,7 +69,13 @@ const ProductTable = ({ data, isLoading, handleDelete, handleEdit }) => {
 			Header: 'Status',
 			accessor: 'status',
 			Cell: ({ value }) => (
-				<span className={`text-[11px] ${getStatusStyle(value)}`}>{value}</span>
+				<span
+					className={`text-[11px] px-3 py-1 rounded-md leading-none ${getStatusStyle(
+						value
+					)} font-medium text-end `}
+				>
+					{value === 'hide' ? 'Inactive' : 'Active'}
+				</span>
 			),
 		},
 		{
@@ -89,11 +95,15 @@ const ProductTable = ({ data, isLoading, handleDelete, handleEdit }) => {
 	const getStatusStyle = (status) => {
 		switch (status) {
 			case 'Active':
-				return 'text-success';
+				return 'text-success bg-success/10';
+			case 'show':
+				return 'text-success bg-success/10';
 			case 'Pending':
-				return 'text-warning';
+				return 'text-warning bg-warning/10';
+			case 'hide':
+				return 'text-danger bg-danger/10';
 			case 'Delivered':
-				return 'text-primary';
+				return 'text-primary bg-primary/10';
 			default:
 				return '';
 		}

@@ -44,12 +44,13 @@ const OrderDetails = () => {
 	const [loading, setLoading] = useState(false);
 	const handleUpdateOrder = async () => {
 		const data = {
-			isDelivered: orderStatus,
+			status: orderStatus,
+			orderId: id,
 		};
 		setLoading(true);
 		try {
 			axios
-				.patch(`${apiUrl}/orders/${id}`, data, config)
+				.post(`${apiUrl}/orders/${id}/status`, data, config)
 				.then((res) => {
 					if (res.data) {
 						toast.success('Order updated successfully');
@@ -107,7 +108,7 @@ const OrderDetails = () => {
 						<div className="flex sm:justify-end flex-wrap sm:space-x-6 mt-5 md:mt-0">
 							<div className="relative">
 								<h5 className="font-normal mb-0">
-									Order Status : {getOrderStatus(order?.isDelivered)}
+									Order Status : {getOrderStatus(order?.status)}
 								</h5>
 
 								<div className="search-select mr-3 flex items-center space-x-3 ">
@@ -153,12 +154,12 @@ const OrderDetails = () => {
 														className="w-10 h-10 rounded-full"
 														src={
 															order?.userId?.image?.url ||
-															'assets/img/users/user-10.jpg'
+															`https://ui-avatars.com/api/?name=${order?.userId?.name}`
 														}
-														alt={order?.firstName}
+														alt={order?.address?.name || order?.userId?.name}
 													/>
 													<span className="font-medium ">
-														{order?.firstName}
+														{order?.userId?.name}
 													</span>
 												</Link>
 											</td>
@@ -168,7 +169,9 @@ const OrderDetails = () => {
 												Email
 											</td>
 											<td className="py-3 text-end">
-												<a href="mailto:support@mail.com">{order?.email}</a>
+												<a href="mailto:support@mail.com">
+													{order?.address?.email || order?.userId?.email}
+												</a>
 											</td>
 										</tr>
 										<tr className="bg-white border-b border-gray6 last:border-0 text-start mx-9">
@@ -176,7 +179,9 @@ const OrderDetails = () => {
 												Phone
 											</td>
 											<td className="py-3 text-end">
-												<a href="tel:9458785014">{order?.phone}</a>
+												<a href="tel:9458785014">
+													{order?.address?.phone || order?.userId?.phone}
+												</a>
 											</td>
 										</tr>
 									</tbody>
@@ -230,14 +235,16 @@ const OrderDetails = () => {
 											<td className="py-3 font-normal text-[#55585B] w-[40%]">
 												House
 											</td>
-											<td className="py-3 text-end">{order?.address}</td>
+											<td className="py-3 text-end">
+												{order?.address?.address}
+											</td>
 										</tr>
 										<tr className="bg-white border-b border-gray6 last:border-0 text-start mx-9">
 											<td className="py-3 font-normal text-[#55585B] w-[40%]">
 												Street
 											</td>
 											<td className="py-3 whitespace-nowrap text-end">
-												{order?.zipCode}
+												{order?.address?.city || order?.address?.town}
 											</td>
 										</tr>
 										<tr className="bg-white border-b border-gray6 last:border-0 text-start mx-9">
@@ -245,7 +252,7 @@ const OrderDetails = () => {
 												State
 											</td>
 											<td className="py-3 text-end">
-												{order?.city}, {order?.country}
+												{order?.city}, {order?.address?.state}
 											</td>
 										</tr>
 									</tbody>
@@ -287,9 +294,9 @@ const OrderDetails = () => {
 											</tr>
 										</thead>
 										<tbody>
-											{order?.cart?.map((item) => (
+											{order?.cart?.map((item, index) => (
 												<tr
-													key={item._id}
+													key={item._id || index}
 													className="bg-white border-b border-gray6 last:border-0 text-start mx-9"
 												>
 													<td className="pr-8 py-5 whitespace-nowrap">
@@ -297,13 +304,13 @@ const OrderDetails = () => {
 															<img
 																className="w-[40px] h-[40px] rounded-md"
 																src={
-																	item.image.url ||
+																	item?.productId?.image?.url ||
 																	'assets/img/product/prodcut-1.jpg'
 																}
-																alt={item.name}
+																alt={item?.productId?.name}
 															/>
 															<span className="font-medium text-heading text-hover-primary transition">
-																{item.name}
+																{item?.productId?.name}
 															</span>
 														</a>
 													</td>
@@ -311,10 +318,10 @@ const OrderDetails = () => {
 														${item?.price}
 													</td>
 													<td className="px-3 py-3 font-normal text-[#55585B] text-end">
-														{item?.cartQuantity}
+														{item?.quantity}
 													</td>
 													<td className="px-3 py-3 font-normal text-[#55585B] text-end">
-														${Number(item?.price) * Number(item?.cartQuantity)}
+														${Number(item?.total)}
 													</td>
 												</tr>
 											))}
@@ -334,7 +341,7 @@ const OrderDetails = () => {
 													Subtotal
 												</td>
 												<td className="px-3 py-3 pt-6 font-normal text-[#55585B] text-end">
-													${order?.cartTotalAmount}
+													${order?.cartTotal}
 												</td>
 											</tr>
 											<tr className="bg-white border-b border-gray6 last:border-0 text-start mx-9">
@@ -350,7 +357,7 @@ const OrderDetails = () => {
 													Grand total:
 												</td>
 												<td className="px-3 py-3 text-[#55585B] text-end text-lg font-semibold">
-													${order?.totalPrice}
+													${order?.total}
 												</td>
 											</tr>
 										</tbody>

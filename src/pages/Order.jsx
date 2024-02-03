@@ -277,12 +277,12 @@ const Order = () => {
 															className="w-[60px] h-[60px] rounded-md"
 															src={
 																order.cart[0]?.productId?.image?.url ||
-																`https://ui-avatars.com/api/?name=${order.total}`
+																`https://ui-avatars.com/api/?name=${order.userId.name}`
 															}
 															alt={order.cart[0]?.productId?.name}
 														/>
 														<span className="font-medium text-heading text-hover-primary transition">
-															{order.name || order.firstName}
+															{order.userId?.name || order.firstName}
 														</span>
 													</Link>
 												</td>

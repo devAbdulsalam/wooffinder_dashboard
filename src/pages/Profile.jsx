@@ -14,8 +14,10 @@ const Profile = () => {
 	const { user, setUser } = useContext(AuthContext);
 	// const [search, setSearch] = useState();
 	const apiUrl = import.meta.env.VITE_API_URL;
-	const [name, setName] = useState(user?.name);
-	const [lastName, setLastName] = useState(user?.name);
+	const fullName = user?.name;
+	const spaceIndex = user?.name?.indexOf(' ');
+	const [name, setName] = useState(fullName.substring(0, spaceIndex));
+	const [lastName, setLastName] = useState(fullName.substring(spaceIndex + 1));
 	const [email, setEmail] = useState(user?.email);
 	const [phone, setPhone] = useState(user?.phone);
 	const [bio, setBio] = useState(user?.bio);

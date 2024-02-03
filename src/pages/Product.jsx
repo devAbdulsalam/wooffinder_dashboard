@@ -50,7 +50,7 @@ const Product = () => {
 		setShowDeleteProductModal(false);
 		try {
 			axios
-				.delete(`${apiUrl}/products/${product._id}`, config)
+				.patch(`${apiUrl}/products/${product._id}/status`, config)
 				.then((res) => {
 					if (res.data) {
 						toast.success('Product deleted successfully');

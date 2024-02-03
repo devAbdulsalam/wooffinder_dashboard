@@ -10,6 +10,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Dialog, Transition } from '@headlessui/react';
 import { Link } from 'react-router-dom';
 import getError from '../hooks/getError';
+import Swal from 'sweetalert2';
 const CustomersList = () => {
 	const { user, selectedProduct, setSelectedProduct } = useContext(AuthContext);
 	const queryClient = useQueryClient();
@@ -59,6 +60,19 @@ const CustomersList = () => {
 	};
 	const handleDelete = async (user) => {
 		setSelectedProduct(user);
+		const willDelete = await Swal.fire({
+			title: 'Are you sure?',
+			text: 'Are you sure you want to delete this user?',
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonText: 'Delete',
+			confirmButtonColor: '#d33',
+			cancelButtonColor: '#3085d6',
+		});
+		if (willDelete.isConfirmed) {
+			console.log(willDelete);
+			handleDeleteCustomer(user);
+		}
 	};
 	const handleDeleteCustomer = async (user) => {
 		if (!user) {
@@ -67,7 +81,7 @@ const CustomersList = () => {
 		try {
 			setLoading(true);
 			axios
-				.delete(`${apiUrl}/user/${user._id}`, config)
+				.post(`${apiUrl}/customers/${user._id}/status`, config)
 				.then((res) => {
 					console.log(res);
 					if (res.data) {
@@ -270,9 +284,15 @@ const CustomersList = () => {
 
 												<td className="px-3 py-3 text-end">{user.email}</td>
 												<td className="px-3 py-3 text-end">
-													<span className="text-[11px]  text-success px-3 py-1 rounded-md leading-none bg-success/10 font-medium text-end">
-														Active
-													</span>
+													{user?.status == 'hide' ? (
+														<span className="text-[11px]  text-warning px-3 py-1 rounded-md leading-none bg-danger/10 font-medium text-end">
+															Inactive
+														</span>
+													) : (
+														<span className="text-[11px]  text-success px-3 py-1 rounded-md leading-none bg-success/10 font-medium text-end">
+															Active
+														</span>
+													)}
 												</td>
 												<td className="px-3 py-3 font-normal text-[#55585B] text-end">
 													{user.phone}
